@@ -2,7 +2,8 @@
 //	Add captions to the images on hover
 //  Animate slides
 
-
+let n = 1
+// On click of next button
 $('input[name=next]').click( function() {
   $(`img:nth-child(${n})`).hide("slow", function() {
     // incriment n; show next image
@@ -19,6 +20,7 @@ $('input[name=next]').click( function() {
   })
 })
 
+// On click of previous button
 $('input[name=previous]').click( function() {
   $(`img:nth-child(${n})`).hide("slow", function() {
     // decriment n; show previous image
@@ -35,10 +37,12 @@ $('input[name=previous]').click( function() {
   })
 })
 
+let keepGoing = true
 $('input[name=play]').click( function() {
 	switch ($(this).val()) {
 		case 'Play Slideshow':
 			$(this).val('Stop Slideshow')
+			keepGoing = true;
 			animateSlides()
 			break
 		case 'Stop Slideshow':
@@ -48,13 +52,31 @@ $('input[name=play]').click( function() {
 	}
 })
 
+// Begin some sort of unending loop of the slides until
+// the user clicks "Stop Slideshow"
 function animateSlides() {
-
+	// Start at current slide
+	// Loop infinitely, smoothly transitioning from the last slide to the first
+	if(keepGoing === true) {
+		var img = $(`img:nth-child(${n})`)
+		$(img).hide("slow", function() {
+			if(n === $('#img-container img').length) n = 0
+			n++
+			img = $(`img:nth-child(${n})`)
+			$(img).show("slow", function() {
+				setTimeout(animateSlides, 5000)
+			})
+		})
+	}
 }
 
 function stopAnimation() {
-
+	keepGoing = false;
 }
+
+// Hide/Show
+// Wait 5 seconds
+// Hide/Show
 
 
 
