@@ -1,10 +1,8 @@
+// To do:
+//	Add captions to the images on hover
+//  Animate slides
 
-var date = new Date()
-var url = 'https://api.nasa.gov/planetary/apod?api_key=T9OaZyEpVqUqEl96TGeUc6TvfYHKBlG0aduSv5Cs&' +
-          `date=${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
-
-let n = 1
 $('input[name=next]').click( function() {
   $(`img:nth-child(${n})`).hide("slow", function() {
     // incriment n; show next image
@@ -35,5 +33,34 @@ $('input[name=previous]').click( function() {
     	$('input[name=previous]').attr('disabled', 'disabled')
     }
   })
-
 })
+
+$('input[name=play]').click( function() {
+	switch ($(this).val()) {
+		case 'Play Slideshow':
+			$(this).val('Stop Slideshow')
+			animateSlides()
+			break
+		case 'Stop Slideshow':
+			$(this).val('Play Slideshow')
+			stopAnimation()
+			break
+	}
+})
+
+function animateSlides() {
+
+}
+
+function stopAnimation() {
+
+}
+
+
+
+
+
+
+
+
+
